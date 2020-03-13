@@ -26,19 +26,17 @@ INNER JOIN usairlineflights2.usairports ON Origin = IATA ORDER BY city, colYear,
 
 5.- Les companyies amb més vols cancelats, per mesos i any. A més, han d’estar ordenades de forma que les companyies amb més cancel·lacions apareguin les primeres.
 
-SELECT DISTINCT UniqueCarrier, colYear, colMonth, SUM(Cancelled) as total_cancelled
+SELECT UniqueCarrier, colYear, colMonth, SUM(Cancelled) as total_cancelled
 FROM usairlineflights2.flights 
 WHERE Cancelled>0
 GROUP BY UniqueCarrier,colMonth,colYear
 ORDER BY total_cancelled DESC;
 
-
 6.- L’identificador dels 10 avions que més distància han recorregut fent vols.
 
-SELECT TailNum, SUM(totalDistance)
 SELECT TailNum, SUM(Distance) as totalDistance
 FROM usairlineflights2.flights
-WHERE TailNum <>""
+WHERE TailNum !=""
 GROUP BY TailNum
 ORDER BY totalDistance DESC;
 
